@@ -5,7 +5,7 @@ from roboflow import Roboflow
 import supervision as sv
 from PIL import Image
 
-# --- Set Page Config ---
+
 st.set_page_config(
     page_title="Ocean Guardian",
     page_icon="🌊",
@@ -13,7 +13,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Custom CSS Styling ---
+
 st.markdown("""
     <style>
         .main {
@@ -44,7 +44,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Model Loading ---
+
 @st.cache_resource
 def load_model():
     rf = Roboflow(api_key="UA0QHQjexJi80OXMSbAD")
@@ -79,7 +79,7 @@ with col1:
         help="Upload a clear image of ocean area for pollution detection"
     )
 
-# --- Processing and Results ---
+
 if uploaded_file:
     with st.spinner("🔍 Analyzing ocean environment..."):
         # Process image
@@ -105,7 +105,7 @@ if uploaded_file:
         )
         annotated_image = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
 
-    # Display results
+   
     with col2:
         with st.container():
             st.markdown("<div class='result-box'>", unsafe_allow_html=True)
@@ -113,8 +113,7 @@ if uploaded_file:
             # Image display
             st.image(annotated_image, use_column_width=True, 
                     caption="Detected Pollution Overview")
-            
-            # Statistics
+       
             detection_count = len(result["predictions"])
             if detection_count > 0:
                 st.error(f"🚨 Alert: {detection_count} pollution items detected!")
